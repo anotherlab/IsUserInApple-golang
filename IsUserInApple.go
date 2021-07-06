@@ -7,13 +7,11 @@ import (
 	"path/filepath"
 )
 
-// go get github.com/dgrijalva/jwt-go
-// go build
-// go build -ldflags="-s -w" IsUserInApple.go
-// go run . emailaddress
 func main() {
+	// Define command line options
 	configPtr := flag.String("config", "./IsUserInApple.json", "Configuration file")
 	usernamePtr := flag.String("username", "", "Username to find (in quotes)")
+
 	flag.Parse()
 
 	var userName string = *usernamePtr
@@ -25,6 +23,8 @@ func main() {
 		os.Exit(1)
 	}
 
+	// If a config file was not specified from the commmand line, assume it's
+	// in the same folder as the executable
 	if len(ConfigFileName) == 0 {
 		ex, err := os.Executable()
 		if err != nil {
