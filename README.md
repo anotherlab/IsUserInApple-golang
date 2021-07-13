@@ -41,9 +41,9 @@ You'll need to create an API key to sign the the JWT and authorize the API reque
 After you create a new API key, the KeyID value will be in the column labeled "KEY ID" for the key that you just created.
 
 ## Referenced packages
-This app uses the <a href="https://github.com/dgrijalva/jwt-go" target="_blank">dgrijalva/jwt-go library</a> to create and sign the JWT. The reference is in <a href="https://github.com/anotherlab/IsUserInApple-golang/blob/main/go.mod" target="_blank">go.mod</a> and should be installed when the app is built. If it doesn't get installed, you can install it with
+This app uses the <a href="https://github.com/golang-jwt/jwt" target="_blank">golang-jwt/jwt library</a> to create and sign the JWT. The reference is in <a href="https://github.com/anotherlab/IsUserInApple-golang/blob/main/go.mod" target="_blank">go.mod</a> and should be installed when the app is built. If it doesn't get installed, you can install it with
 
-`go get github.com/dgrijalva/jwt-go`
+`go get github.com/golang-jwt/jwt`
 
 ## How to build it
 Assuming that you have Go installed, you can build it from the command line with
