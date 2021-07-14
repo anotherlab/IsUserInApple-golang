@@ -32,6 +32,16 @@ type AppConnectUsersLinks = struct {
 	Next string `json:"next"`
 }
 
+// struct generated via https://mholt.github.io/json-to-go/
+type AppConnectErrors struct {
+	Errors []struct {
+		Status string `json:"status"`
+		Code   string `json:"code"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+	} `json:"errors"`
+}
+
 func CheckUserList(config *ConfigSettings, Username string) {
 	token, err := CreateAppleJWT(config)
 	if err != nil {
@@ -48,7 +58,7 @@ func CheckUserList(config *ConfigSettings, Username string) {
 		req, err := http.NewRequest("GET", nextUrl, nil)
 		if err != nil {
 			fmt.Print(err.Error())
-			break
+			os.Exit(3)
 		}
 
 		req.Header.Add("Authorization", "Bearer "+token)
@@ -56,6 +66,7 @@ func CheckUserList(config *ConfigSettings, Username string) {
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Println("Error on response.\n[ERROR] -", err)
+			os.Exit(3)
 		}
 
 		defer resp.Body.Close()
@@ -63,9 +74,26 @@ func CheckUserList(config *ConfigSettings, Username string) {
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Println("Error while reading the response bytes:", err)
-			break
+			os.Exit(3)
 		}
 
+		// Check for the AppConnect API returning an error first
+		var appConnectErrors AppConnectErrors
+		err = json.Unmarshal(body, &appConnectErrors)
+		if err != nil {
+			log.Println("Error while deserializing the response bytes:", err)
+			os.Exit(3)
+		}
+
+		// If there is an error object in the body, print it and exit
+		if len(appConnectErrors.Errors) > 0 {
+			firstError := appConnectErrors.Errors[0]
+			log.Println("Status:", firstError.Status)
+			log.Println("Error accessing API:", firstError.Detail)
+			os.Exit(4)
+		}
+
+		// Otherwise keep going
 		var appConnectUsers AppConnectUsers
 
 		err = json.Unmarshal(body, &appConnectUsers)

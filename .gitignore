@@ -20,6 +20,9 @@ IsUserInApple.json
 .AppleDouble
 .LSOverride
 
+# log files
+debug.log
+
 ##
 ## Visual Studio Code
 ##
