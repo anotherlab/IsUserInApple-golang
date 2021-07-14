@@ -23,7 +23,7 @@ func ReadConfig(ConfigFileName string) (*ConfigSettings, error) {
 	file, err := ioutil.ReadFile(ConfigFileName)
 
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
 	config := new(ConfigSettings)
