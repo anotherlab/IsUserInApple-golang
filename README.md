@@ -57,7 +57,7 @@ For the smallest executable size, build it with the following options
 Then compress the exe file with <a href="https://upx.github.io/" target="_blank">upx</a>.
 
 ## How to run it
-You would run the IsUserInApple with a required command line parameter, the email to look for. If you leave it out, you will get an error message telling you what is needed. Remember that the IsUserInApple.json file needs to be in the same folder as the executable. A second optional command line parameter will let you specify the name of the config file.
+You would run IsUserInApple with a required command line parameter, the email to look for. If you leave it out, you will get an error message telling you what is needed. Remember that the IsUserInApple.json file needs to be in the same folder as the executable. A second optional command line parameter will let you specify the name of the config file.
 
 If you are running it with the go command, you would run it as
 
