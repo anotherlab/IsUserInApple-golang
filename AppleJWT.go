@@ -56,7 +56,7 @@ func CreateAppleJWT(settings *ConfigSettings) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{
 		"iss": settings.IssuerID,
-		"exp": time.Now().Add(time.Minute * 20).Unix(),
+		"exp": time.Now().Add(time.Minute * 10).Unix(),
 		"aud": "appstoreconnect-v1",
 	})
 

@@ -71,4 +71,10 @@ Otherwise you would run it as
 
 `IsUserInApple -username "some.email@company.com"`
 
+You can also specify a list of user names with the `-userlist` parameter
+
+`go run . -userlist somefile.txt`
+
+If you specifify both `-userlist` and `-username`, the value passed to `-userlist` will be used.
+
 You can also pass in "-h" or "--help" as command line parameters
